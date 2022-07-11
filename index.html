@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Speed Reader</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+    <header>
+      <h1 class="highscores">View Highscores</h1>
+      <h1 class="time" style="text-align:right;">Time: </h1>
+    </header>
+        <div class="begin">
+        <h2 id="coding" style="text-align:center;">Coding Quiz Challenge</h2>
+        <p id="instructions" style="text-align:center;">Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+        <button id="start">Start Quiz</button>
+        </div>   
+    </div>
+
+    <div class="quiz_box" style="visibility: hidden;">
+            <div class="que_text">
+                <!-- Here I've inserted question from JavaScript -->
+                <h3 id="question" style="text-align:center;"></h3>
+            </div>
+            <div class="option_list">
+                <!-- Here I've inserted options from JavaScript -->
+                <button id="option1"></button>
+                <button id="option2"></button>
+                <button id="option3"></button>
+                <button id="option4"></button>
+            </div>
+        <!-- footer of Quiz Box -->
+        <footer>
+            <div class="card-body">
+                <textarea
+                  readonly
+                  id="status"
+                  placeholder="Answer status"
+                  aria-label="Generated Password">
+                </textarea>
+        </footer>
+    </div>
+
+    <!-- Result Box -->
+    <div class="result_box" style="visibility: hidden;">
+        <div class="complete_text">All done!</div>
+        <div class="score_text">
+            <!-- Here I've inserted Score Result from JavaScript -->
+        </div>
+        <div class="initials">
+            <p class="restart">Replay Quiz</button>
+            <button class="quit">Quit Quiz</button>
+        </div>
+    </div>
+
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
+

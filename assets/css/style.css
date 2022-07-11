@@ -1,0 +1,24 @@
+.container {
+    height: 200px;
+    position: relative;
+    
+  }
+  
+
+#start {
+    margin: 0;
+  position: relative;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  display:block;
+  }
+
+  .question1{
+     visibility: hidden; 
+  }
+
+  .question2{
+      visibility: hidden;
+  }
