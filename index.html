@@ -9,7 +9,7 @@
   </head>
   <body>
     <div class="container">
-    <header>
+    <header id="headerText">
       <h1 class="highscores">View Highscores</h1>
       <h1 class="time" style="text-align:right;">Time: </h1>
     </header>
@@ -45,14 +45,32 @@
     </div>
 
     <!-- Result Box -->
-    <div class="result_box" style="visibility: hidden;">
+    <div class="result_box" id="result_box" style="visibility: hidden;">
         <div class="complete_text">All done!</div>
-        <div class="score_text">
-            <!-- Here I've inserted Score Result from JavaScript -->
+        <div class="score_text">Your final score is <span id="count"></span>.</div></div>
+        <div class="initials" style="visibility: hidden;">Enter initials: 
+          <input placeholder="Initials" id="initials" />
+            <button class="submit">Submit</button>
+            <div>
+              <h3 id="response"></h3>
+            </div>
         </div>
-        <div class="initials">
-            <p class="restart">Replay Quiz</button>
-            <button class="quit">Quit Quiz</button>
+    </div>
+
+    <!-- High Scores Box -->
+    <div class="high_score_box" style="visibility: hidden;">
+        <h1>Highscores</h1>
+        <div class="highscores" id="highscores" style="visibility: hidden;">
+          <textarea
+                  readonly
+                  id="highscores"
+                  placeholder="Highscores"
+                  aria-label="Generated Password">
+                </textarea>
+                <p>Score Count: <span id="score-count">0</span></p>
+                <ul id="score-list"></ul>
+            <button class="goBack">Go Back</button>
+            <button class="clear">Clear Highscores</button>
         </div>
     </div>
 

@@ -4,6 +4,12 @@ var beginEl = document.querySelector(".begin");
 var startButton = document.querySelector("#start");
 var questionText = document.querySelector(".que_text");
 var quizBox = document.querySelector(".quiz_box");
+var resultBox = document.querySelector("#result_box");
+var initialEl = document.querySelector(".initials");
+var initialText = document.querySelector("#initials");
+var highScoreBox = document.querySelector(".high_score_box");
+var highScoresEl = document.querySelector("#highscores");
+var headerEl = document.querySelector("#headerText");
 var select1 = document.querySelector("#option1");
 var select2 = document.querySelector("#option2");
 var select3 = document.querySelector("#option3");
@@ -11,9 +17,14 @@ var select4 = document.querySelector("#option4");
 var result = document.querySelector("#status");
 var questionEl = document.querySelector("#question");
 var optionEl = document.querySelector(".option_list");
+var countEl = document.querySelector("#count");
+var submitButton = document.querySelector(".submit");
+var submissionResponseEl = document.querySelector("#response");
+var goBackButton = document.querySelector("#goBack");
+var clearHighScoresButton = document.querySelector("#clear");
 var currentQuestionIndex = 0;
 var timeLeft = 75;
-
+var timeInterval;
 
 var quiz = [
     {
@@ -68,33 +79,51 @@ var quiz = [
     }
 ];
 
-var currentQuestion = quiz[currentQuestionIndex];
+var scoreList = document.querySelector("#score-list");
+var scoreCountSpan = document.querySelector("#score-count");
+
+var scores = [];
 
 startButton.addEventListener("click", function(event) {
     event.preventDefault();
     beginEl.setAttribute("style", "visibility: hidden");
-    //questionText.setAttribute("style", "visibility: visible");
+    resultBox.setAttribute("style", "visibility: hidden");
+    initialEl.setAttribute("style", "visibility: hidden");
     quizBox.setAttribute("style", "visibility: visible");
     displayQuestions();
 }); 
 
 function answerQuestion(event){
+    var currentQuestion = quiz[currentQuestionIndex];
     if(event.target.textContent == currentQuestion.answer){
         result.textContent = "Correct Answer!";
-
     } else{
         result.textContent = "Wrong Answer!";
         timeLeft-=10;
         timerEl.textContent = timeLeft + ' seconds remaining';
     }
 currentQuestionIndex++;
-displayQuestions();
+//console.log(currentQuestionIndex, quiz.length);
+
+if(currentQuestionIndex === quiz.length){
+clearInterval(timeInterval);
+quizBox.setAttribute("style", "visibility: hidden");
+resultBox.setAttribute("style", "visibility: visible");
+initialEl.setAttribute("style", "visibility: visible");
+countEl.textContent = timeLeft;
+initialInput = initialText.value;
+
+}
+else
+{
+  displayQuestions();
+}
     /*var finalScore = 0;
     finalScore++;*/
 }
 
 function displayQuestions(){
-
+var currentQuestion = quiz[currentQuestionIndex];   
 questionEl.textContent = currentQuestion.question;  
 select1.textContent = currentQuestion.options[0];
 select2.textContent = currentQuestion.options[1];
@@ -102,46 +131,143 @@ select3.textContent = currentQuestion.options[2];
 select4.textContent = currentQuestion.options[3];
 
 optionEl.addEventListener("click", answerQuestion)
-/*for (let i = 0; i <= quiz.length; i++) {
-    questionText.textContent = quiz[i];
-}*/
+
 }
 
-
+/*function highScoresInfo(event) {
+  // Prevent default action
+  event.preventDefault();
+  console.log(event);
+  if (initialInput === "") {
+  displayMessage("error", "Initials cannot be blank");
+}
+  resultBox.setAttribute("style", "visibility: hidden");
+  initialEl.setAttribute("style", "visibility: hidden");
+  var response = "Thank you for your submission " + nameInput.value + "! We will reach out to you at " + emailInput.value + ".";
+  submissionResponseEl.textContent = response;
+}
+  
+// Add listener to submit element
+submitEl.addEventListener("click", showResponse);
 
 /*localStorage.setItem("quesCount", JSON.stringify(quesCount));
 renderMessage();*/
 
+/*var count = localStorage.getItem("count");
 
+counter.textContent = count;
 
+function renderLastRegistered() {
+  var email = localStorage.getItem("email");
+  var password = localStorage.getItem("password");
 
-/*function getQuestion() {
- var currentQuestion = quiz[currentQuestionIndex]
- console.log(currentQuestion.question)
- console.log(currentQuestion.answer)
- console.log(currentQuestion.options[0])
- console.log(currentQuestion.options[1])
- console.log(currentQuestion.options[2])
- console.log(currentQuestion.options[3])
- currentQuestionIndex++
+  if (!email || !password) {
+    return;
+  }
+  initialText.value = initialInput;
+  userEmailSpan.textContent = email;
+  userPasswordSpan.textContent = password;
+}*/
+
+submitButton.addEventListener("click", function(event) {
+  event.preventDefault();
+
+  //var email = document.querySelector("#email").value;
+  //var password = document.querySelector("#password").value;
+
+  var scoreText = initialText.value.trim();
+
+  // Return from function early if submitted todoText is blank
+  if (scoreText === "") {
+    return;
+  }
+
+   // Add new todoText to todos array, clear the input
+   scores.push(scoreText);
+   initialText.value = "";
+ 
+   // Store updated todos in localStorage, re-render the list
+
+  resultBox.setAttribute("style", "visibility: hidden");
+  initialEl.setAttribute("style", "visibility: hidden");
+  headerEl.setAttribute("style", "visibility: hidden");
+  highScoreBox.setAttribute("style", "visibility: visible");
+  highScoresEl.setAttribute("style", "visibility: visible");
+   // localStorage.setItem("email", email);
+   // localStorage.setItem("password", password);
+   // renderLastRegistered();
+   storeScores();
+   renderScores();
+   //highScoresEl.textContent = scoreCountSpan.value + "." + initialText.value + "-" + timeLeft;
+  }
+);
+
+clearHighScoresButton.addEventListener("click", function(){
+
+highScoresEl.setAttribute("style", "visibility: hidden");
+
 }
-getQuestion()*/
+);
 
 
-function renderMessage() {
+// The following function renders items in a todo list as <li> elements
+function renderScores() {
+  // Clear todoList element and update todoCountSpan
+  scoreList.innerHTML = "";
+  scoreCountSpan.textContent = scores.length;
+
+  // Render a new li for each todo
+  for (var i = 0; i < scores.length; i++) {
+    var score = scores[i];
+
+    var li = document.createElement("li");
+    li.textContent = score;
+    li.setAttribute("data-index", i);
+
+    countEl.textContent = timeLeft;
+
+    li.appendChild(countEl.value);
+    scoreList.appendChild(li);
+  }
+}
+
+// This function is being called below and will run when the page loads.
+function init() {
+  // Get stored scores from localStorage
+  var storedScores = JSON.parse(localStorage.getItem("scores"));
+
+  // If scores were retrieved from localStorage, update the todos array to it
+  if (storedScores !== null) {
+    scores = storedScores;
+  }
+
+  // This is a helper function that will render scores to the DOM
+  renderScores();
+}
+
+function storeScores() {
+  // Stringify and set key in localStorage to scores array
+  localStorage.setItem("scores", JSON.stringify(scores));
+}
+
+
+// Calls init to retrieve data and render it to the page on load
+init()
+
+/*function renderMessage() {
     var questionCount = 0;
   var lastGrade = JSON.parse(localStorage.getItem("quesCount"));
   if (lastGrade !== null) {
     document.querySelector(".message").textContent = lastGrade.student + 
     " received a/an " + lastGrade.grade
   }
-}
+}*/
 
 // Timer that counts down from 5
 function countdown() {
 
   // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-  var timeInterval = setInterval(function () {
+  timeInterval = setInterval(function () {
     // As long as the `timeLeft` is greater than 1
     if (timeLeft > 1) {
       // Set the `textContent` of `timerEl` to show the remaining seconds
