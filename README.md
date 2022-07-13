@@ -25,7 +25,7 @@ In this challenge, I have developed a timed coding quiz with multiple-choice que
 [!image](./assets/images/Start.jpg)
 [!image](./assets/images/Quizr.jpg)
 [!image](./assets/images/Quizw.jpg)
-[!image](./assets/images/Total.jpg)
+[!image](./assets/images/Final.jpg)
 [!image](./assets/images/Highscores.jpg)
 [!image](./assets/images/End.jpg)
 
