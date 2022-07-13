@@ -79,7 +79,8 @@
   .submit{
     margin-left: 500px;
     display: flex;
-    position: absolute;
+    justify-content: center;
+    align-items: center;
   }
 
   

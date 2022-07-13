@@ -22,7 +22,14 @@ In this challenge, I have developed a timed coding quiz with multiple-choice que
 
 - On the click of "Go Back" button, the user is taken to the main (instructions) page. The time gets refreshed to zero.
 
+[!image] (./assets/images/Start page.jpg)
+[!image] (./assets/images/Quiz answer right.jpg)
+[!image] (./assets/images/Quiz answer wrong.jpg)
+[!image] (./assets/images/Total score.jpg)
+[!image] (./assets/images/Highscores.jpg)
+[!image] (./assets/images/End page.jpg)
 
+![video](./assets/images/Timed-coding-quiz.mov)
 
 Github URL:
 https://github.com/niralikap/Timed-coding-quiz
