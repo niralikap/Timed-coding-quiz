@@ -15,14 +15,6 @@
   display:block;
   }
 
-  /*.question1{
-     visibility: hidden; 
-  }
-
-  .question2{
-      visibility: hidden;
-  }*/
-
   button {
     padding: 10px;
     margin: 24px;
@@ -35,6 +27,7 @@
   height: 30px;
   line-height: 8px;
   margin-top: 20px;
+  
   }
   
   h1{
@@ -58,3 +51,35 @@
   .clear{
     display: inline;
   }
+
+  #instructions{
+    text-align: center;
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+
+  .option_list{
+    margin-left: 200px;
+  }
+
+  #status{
+    margin-left: 220px;
+  }
+
+  #question{
+    text-align: center;
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+
+  #result_box{
+    text-align: center;
+  }
+
+  .submit{
+    margin-left: 500px;
+    display: flex;
+    position: absolute;
+  }
+
+  
