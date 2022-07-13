@@ -1,5 +1,5 @@
 .container {
-    height: 200px;
+    height: 100vh;
     position: relative;
     
   }
@@ -15,10 +15,46 @@
   display:block;
   }
 
-  .question1{
+  /*.question1{
      visibility: hidden; 
   }
 
   .question2{
       visibility: hidden;
+  }*/
+
+  button {
+    padding: 10px;
+    margin: 24px;
+    cursor: pointer;
+    /*font-size: 24px;*/
+    background-color: #4924a0;
+    color: white;
+    display: block;
+    font-size: 16px;
+  height: 30px;
+  line-height: 8px;
+  margin-top: 20px;
+  }
+  
+  h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+    color: #4924a0;
+  }
+
+  h2{
+    font-size:xx-large;
+  }
+  .time{
+    color: black;
+    top: -80%;
+  }
+
+  .goBack{
+    display: inline;
+  }
+
+  .clear{
+    display: inline;
   }

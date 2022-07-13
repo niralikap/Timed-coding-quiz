@@ -9,6 +9,7 @@ var initialEl = document.querySelector(".initials");
 var initialText = document.querySelector("#initials");
 var highScoreBox = document.querySelector(".high_score_box");
 var highScoresEl = document.querySelector("#highscores");
+var scoreListEl = document.querySelector("#score-list");
 var headerEl = document.querySelector("#headerText");
 var select1 = document.querySelector("#option1");
 var select2 = document.querySelector("#option2");
@@ -20,11 +21,12 @@ var optionEl = document.querySelector(".option_list");
 var countEl = document.querySelector("#count");
 var submitButton = document.querySelector(".submit");
 var submissionResponseEl = document.querySelector("#response");
-var goBackButton = document.querySelector("#goBack");
-var clearHighScoresButton = document.querySelector("#clear");
+var goBackButton = document.querySelector(".goBack");
+var clearHighScoresButton = document.querySelector(".clear");
 var currentQuestionIndex = 0;
 var timeLeft = 75;
 var timeInterval;
+var totalScore;
 
 var quiz = [
     {
@@ -86,10 +88,10 @@ var scores = [];
 
 startButton.addEventListener("click", function(event) {
     event.preventDefault();
-    beginEl.setAttribute("style", "visibility: hidden");
-    resultBox.setAttribute("style", "visibility: hidden");
-    initialEl.setAttribute("style", "visibility: hidden");
-    quizBox.setAttribute("style", "visibility: visible");
+    beginEl.setAttribute("style", "display: none");
+    resultBox.setAttribute("style", "display: none");
+    initialEl.setAttribute("style", "display: none");
+    quizBox.setAttribute("style", "display: block");
     displayQuestions();
 }); 
 
@@ -107,10 +109,11 @@ currentQuestionIndex++;
 
 if(currentQuestionIndex === quiz.length){
 clearInterval(timeInterval);
-quizBox.setAttribute("style", "visibility: hidden");
-resultBox.setAttribute("style", "visibility: visible");
-initialEl.setAttribute("style", "visibility: visible");
+quizBox.setAttribute("style", "display: none");
+resultBox.setAttribute("style", "display: block");
+initialEl.setAttribute("style", "display: block");
 countEl.textContent = timeLeft;
+var totalScore = timeLeft;
 initialInput = initialText.value;
 
 }
@@ -134,40 +137,6 @@ optionEl.addEventListener("click", answerQuestion)
 
 }
 
-/*function highScoresInfo(event) {
-  // Prevent default action
-  event.preventDefault();
-  console.log(event);
-  if (initialInput === "") {
-  displayMessage("error", "Initials cannot be blank");
-}
-  resultBox.setAttribute("style", "visibility: hidden");
-  initialEl.setAttribute("style", "visibility: hidden");
-  var response = "Thank you for your submission " + nameInput.value + "! We will reach out to you at " + emailInput.value + ".";
-  submissionResponseEl.textContent = response;
-}
-  
-// Add listener to submit element
-submitEl.addEventListener("click", showResponse);
-
-/*localStorage.setItem("quesCount", JSON.stringify(quesCount));
-renderMessage();*/
-
-/*var count = localStorage.getItem("count");
-
-counter.textContent = count;
-
-function renderLastRegistered() {
-  var email = localStorage.getItem("email");
-  var password = localStorage.getItem("password");
-
-  if (!email || !password) {
-    return;
-  }
-  initialText.value = initialInput;
-  userEmailSpan.textContent = email;
-  userPasswordSpan.textContent = password;
-}*/
 
 submitButton.addEventListener("click", function(event) {
   event.preventDefault();
@@ -183,32 +152,50 @@ submitButton.addEventListener("click", function(event) {
   }
 
    // Add new todoText to todos array, clear the input
-   scores.push(scoreText);
+   scores.push( {
+     "name": scoreText,
+     "total": totalScore,
+     //total: countEl.value,
+   }
+  );
+  console.log(scores);
    initialText.value = "";
  
    // Store updated todos in localStorage, re-render the list
 
-  resultBox.setAttribute("style", "visibility: hidden");
-  initialEl.setAttribute("style", "visibility: hidden");
-  headerEl.setAttribute("style", "visibility: hidden");
-  highScoreBox.setAttribute("style", "visibility: visible");
-  highScoresEl.setAttribute("style", "visibility: visible");
+  resultBox.setAttribute("style", "display: none");
+  initialEl.setAttribute("style", "display: none");
+  headerEl.setAttribute("style", "display: none");
+  highScoreBox.setAttribute("style", "display: block");
+  highScoresEl.setAttribute("style", "display: block");
    // localStorage.setItem("email", email);
    // localStorage.setItem("password", password);
    // renderLastRegistered();
    storeScores();
    renderScores();
-   //highScoresEl.textContent = scoreCountSpan.value + "." + initialText.value + "-" + timeLeft;
+   //var StatusText = scoreCountSpan.value + "." + initialText.value + "-" + timeLeft;
+   //highScoresEl.textContent = StatusText;
   }
 );
 
 clearHighScoresButton.addEventListener("click", function(){
 
-highScoresEl.setAttribute("style", "visibility: hidden");
-
+highScoresEl.setAttribute("style", "display: none");
+goBackButton.setAttribute("style", "vibility: visible");
+clearHighScoresButton.setAttribute("style", "visiility: visible");
 }
 );
 
+goBackButton.addEventListener("click", function(){
+  highScoreBox.setAttribute("style", "display: none");
+  goBackButton.setAttribute("style", "display: none");
+  clearHighScoresButton.setAttribute("style", "display: none");
+  highScoresEl.setAttribute("style", "display: none");
+  scoreListEl.setAttribute("style", "display: none");
+  headerEl.setAttribute("style", "display: block");
+  beginEl.setAttribute("style", "display: block");
+  location.reload();
+})
 
 // The following function renders items in a todo list as <li> elements
 function renderScores() {
@@ -221,13 +208,20 @@ function renderScores() {
     var score = scores[i];
 
     var li = document.createElement("li");
-    li.textContent = score;
+    li.textContent = score["name"] + "-" + timeLeft.toString();
+    //li.textContent = score["name"] + "-" + score[total];
     li.setAttribute("data-index", i);
+
+    //var button = document.createElement("button");
+    //countEl.value = scoreValue;
+    //button.textContent = scoreValue;
 
     countEl.textContent = timeLeft;
 
-    li.appendChild(countEl.value);
+    //li.appendChild(button);
     scoreList.appendChild(li);
+    //var StatusText = scores.length + "." + initialText.value + "-" + timeLeft;
+    //highScoresEl.textContent = StatusText;
   }
 }
 

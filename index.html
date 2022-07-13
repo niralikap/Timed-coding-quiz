@@ -11,16 +11,16 @@
     <div class="container">
     <header id="headerText">
       <h1 class="highscores">View Highscores</h1>
-      <h1 class="time" style="text-align:right;">Time: </h1>
+      <h1 class="time" style="text-align:right;">Time: 0</h1>
     </header>
         <div class="begin">
         <h2 id="coding" style="text-align:center;">Coding Quiz Challenge</h2>
         <p id="instructions" style="text-align:center;">Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
         <button id="start">Start Quiz</button>
         </div>   
-    </div>
+    
 
-    <div class="quiz_box" style="visibility: hidden;">
+    <div class="quiz_box" style="display:none;">
             <div class="que_text">
                 <!-- Here I've inserted question from JavaScript -->
                 <h3 id="question" style="text-align:center;"></h3>
@@ -45,10 +45,10 @@
     </div>
 
     <!-- Result Box -->
-    <div class="result_box" id="result_box" style="visibility: hidden;">
-        <div class="complete_text">All done!</div>
-        <div class="score_text">Your final score is <span id="count"></span>.</div></div>
-        <div class="initials" style="visibility: hidden;">Enter initials: 
+    <div class="result_box" id="result_box" style="display:none;">
+        <div class="complete_text"><h2>All done!</h2></div>
+        <div class="score_text">Your final score is <span id="count"></span>.</div>
+        <div class="initials" style="display:none;">Enter initials: 
           <input placeholder="Initials" id="initials" />
             <button class="submit">Submit</button>
             <div>
@@ -56,24 +56,24 @@
             </div>
         </div>
     </div>
-
+  
     <!-- High Scores Box -->
-    <div class="high_score_box" style="visibility: hidden;">
-        <h1>Highscores</h1>
-        <div class="highscores" id="highscores" style="visibility: hidden;">
-          <textarea
-                  readonly
+    <div class="high_score_box" style="display:none;">
+        <h2>Highscores</h2>
+        <div class="highscores" id="highscores" style="display: hidden;">
+          <!--<textarea
                   id="highscores"
                   placeholder="Highscores"
                   aria-label="Generated Password">
-                </textarea>
-                <p>Score Count: <span id="score-count">0</span></p>
-                <ul id="score-list"></ul>
-            <button class="goBack">Go Back</button>
-            <button class="clear">Clear Highscores</button>
+                </textarea>-->
+                <p>Total Attempts: <span id="score-count">0</span></p>
+                <ol id="score-list"></ol>
+            
         </div>
+        <button class="goBack">Go Back</button>
+        <button class="clear">Clear Highscores</button>
     </div>
-
+  </div>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
